@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1366, initial-scale=1.0">
+    <title>This is for you</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&family=Caveat:wght@700&family=Great+Vibes&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Baloo 2', sans-serif;
+        }
+
+        body {
+            overflow: hidden;
+            background: #f6f8fc;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* حاوية الصفحة الرئيسية - تم دمج نظام التكبير التلقائي الفاخر الخاص بملف next3 */
+        .container {
+            width: 1366px;
+            height: 768px;
+            margin: auto;
+            position: relative;
+            
+            /* دمج التدرج اللوني مع الصورة الأصلية للخلفية */
+            background-image: linear-gradient(135deg, rgba(161, 196, 253, 0.5) 0%, rgba(194, 233, 251, 0.5) 100%), 
+                              url('./images/80d5ba097d6ab897c864a8b56a5591a5.jpg');
+            
+            background-size: cover;
+            background-position: bottom;
+            background-repeat: no-repeat;
+            overflow: hidden;
+            
+            display: flex;
+            flex-direction: column; 
+            align-items: center;    
+            justify-content: flex-start; 
+            padding-top: 40px;      
+            backface-visibility: hidden;
+            will-change: transform;
+        }
+
+        /* الاستجابة التلقائية المتقدمة والفاخرة بدون جافاسكريبت تماماً كما في next3 */
+        @media screen and (min-width: 1025px) {
+            html, body {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background: #f6f8fc;
+            }
+            .container {
+                transform: scale(calc(min(100vw / 1366, 100vh / 768)));
+                transform-origin: center center;
+                flex-shrink: 0;
+            }
+        }
+
+        /* الدوائر الزخرفية الأصلية كود 1 */
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            z-index: 0;
+            opacity: 1;
+        }
+        .c1 { width: 300px; height: 300px; background: #DBEAFE; top: -120px; left: -100px; }
+        .c2 { width: 220px; height: 220px; background: #E0F2FE; bottom: -80px; right: -60px; }
+
+        /* النجوم الزخرفية الأصلية */
+        .star {
+            position: absolute;
+            color: #FBBF24;
+            font-size: 25px;
+            animation: pulseStar 2s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes pulseStar {
+            0%, 100% { opacity: 0.3; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* --- تصميم جملة المعايدة الأصلية والمشعة باللون الأبيض --- */
+        .birthday-header {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .birthday-title {
+            font-family: 'Great Vibes', cursive; /* الحفاظ على الخط الأصلي بالكامل */
+            font-size: 85px;
+            color: #ffffff;
+            
+            /* الخلطة السرية الأصلية */
+            text-shadow: 
+                1px 1px 3px rgba(0, 0, 0, 0.4),  
+                0 0 10px rgba(255, 255, 255, 0.9), 
+                0 0 25px rgba(255, 255, 255, 0.5); 
+                
+            display: inline-flex;
+            gap: 20px; 
+        }
+
+        /* تأثير السقوط لكل كلمة بشكل منفصل */
+        .word {
+            font-family: 'Great Vibes', cursive;
+            display: inline-block;
+            margin-right: 15px; 
+            transform: translateY(-200vh); 
+            animation: dropWord 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards; 
+        }
+
+        /* الكلمة الأخيرة لا تحتاج لمسافة بعدها */
+        .word:last-child {
+            margin-right: 0;
+        }
+
+        /* توزيع التوقيت الزمني (Stagger Animation) */
+        .w1 { animation-delay: 0.1s; }
+        .w2 { animation-delay: 0.3s; }
+        .w3 { animation-delay: 0.5s; }
+        .w4 { animation-delay: 0.7s; }
+
+        /* أنيميشن السقوط مع ارتداد خفيف جداً وناعم للغاية عند الاستقرار */
+        @keyframes dropWord {
+            0% {
+                transform: translateY(-200vh); /* تبدأ من فوق الشاشة */
+            }
+            100% {
+                transform: translateY(0); /* تستقر مباشرة في مكانها الأصلي بدون أي نزول إضافي أو ارتداد */
+            }
+        }
+
+        /* --- حاوية مستطيل فيديو اليوتيوب الزجاجي الفخم --- */
+        .video-container {
+            width: 720px;
+            height: 405px; 
+            z-index: 5;
+            background: rgba(255, 255, 255, 0.2); 
+            border: 2px solid rgba(255, 255, 255, 0.4); 
+            border-radius: 24px;
+            padding: 12px;
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .video-container:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 18px 35px rgba(0, 0, 0, 0.25);
+        }
+
+        .video-container iframe {
+            width: 100%;
+            height: 100%;
+            border-radius: 14px;
+            border: none;
+        }
+
+        /* --- تصميم الزر الزجاجي الفخم للسهم المأخوذ من ملف next.html --- */
+        .btn-link {
+            text-decoration: none;
+            margin-top: 35px; 
+            z-index: 10; 
+        }
+
+        .btn-yes {
+            border: 2px solid rgba(255, 255, 255, 0.4); 
+            padding: 12px 50px; 
+            border-radius: 40px; 
+            font-size: 28px; 
+            font-weight: 700; 
+            cursor: pointer; 
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); 
+            background: rgba(255, 255, 255, 0.2); 
+            color: #fff; 
+            backdrop-filter: blur(8px); 
+            -webkit-backdrop-filter: blur(8px); 
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); 
+            display: inline-flex; 
+            align-items: center; 
+            justify-content: center; 
+            line-height: 1; 
+        }
+
+        .btn-yes:hover { 
+            background: #2563EB; 
+            color: white; 
+            border-color: #2563EB; 
+            transform: translateY(-5px); 
+            box-shadow: 0 12px 28px rgba(37, 99, 235, 0.4), 0 0 15px rgba(37, 99, 235, 0.2); 
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="circle c1"></div>
+    <div class="circle c2"></div>
+
+    <div class="star" style="top: 10%; left: 20%;">★</div>
+    <div class="star" style="top: 8%; right: 12%; animation-delay: 0.3s;">✦</div>
+    <div class="star" style="bottom: 15%; left: 8%; animation-delay: 0.6s;">✦</div>
+    <div class="star" style="bottom: 10%; right: 25%; animation-delay: 0.9s;">★</div>
+
+    <div class="birthday-header">
+        <h1 class="birthday-title">
+            <span class="word w1">This</span>
+            <span class="word w2">is</span>
+            <span class="word w3">for</span>
+            <span class="word w4">you</span>
+        </h1>
+    </div>
+
+    <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/AVSUqnqr5zI"
+                title="YouTube video player" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                allowfullscreen>
+        </iframe>
+    </div>
+
+    <a href="next3.html" class="btn-link">
+        <button class="btn-yes">&#10142;</button>
+    </a>
+
+</div>
+
+</body>
+</html>

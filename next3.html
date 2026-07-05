@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxury Open Envelope</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght=500;700&family=Amiri:ital@1&family=Cairo:wght=400;600&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            overflow: hidden;
+            background: #f6f8fc;
+            font-family: 'Cairo', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* حاوية الخلفية الرئيسية */
+        .container {
+            width: 1366px;
+            height: 768px;
+            margin: auto;
+            position: relative;
+            background-image: linear-gradient(135deg, rgba(161, 196, 253, 0.4) 0%, rgba(194, 233, 251, 0.4) 100%), 
+                              url('./images/80d5ba097d6ab897c864a8b56a5591a5.jpg');
+            background-size: cover;
+            background-position: bottom;
+            background-repeat: no-repeat;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center; 
+            perspective: 2500px;
+            backface-visibility: hidden;
+            will-change: transform;
+        }
+
+        /* استجابة الشاشات المكتبية واللابتوب الفاخرة دون المساس بالهواتف */
+        @media screen and (min-width: 1025px) {
+            html, body {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background: #f6f8fc;
+            }
+            .container {
+                transform: scale(calc(min(100vw / 1366, 100vh / 768)));
+                transform-origin: center center;
+                flex-shrink: 0;
+            }
+        }
+
+        /* الدوائر الزخرفية */
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            z-index: 0;
+            opacity: 1;
+            will-change: transform;
+        }
+        .c1 { width: 300px; height: 300px; background: #DBEAFE; top: -120px; left: -100px; }
+        .c2 { width: 220px; height: 220px; background: #E0F2FE; bottom: -80px; right: -60px; }
+
+        /* النجوم الزخرفية */
+        .star {
+            position: absolute;
+            color: #FBBF24;
+            font-size: 25px;
+            animation: pulseStar 2s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 1;
+            will-change: transform, opacity;
+        }
+
+        @keyframes pulseStar {
+            0%, 100% { opacity: 0.3; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* =========================================
+           تعديل شرائط الصور والزينة الوردية الفاخرة
+        =========================================== */
+        .side-decor-section {
+            position: absolute;
+            right: 80px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 380px;
+            height: 600px;
+            z-index: 5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* زينة خلفية فاخرة تعتمد على الورود الهادئة (بدون أي لون أخضر) */
+        .luxury-floral-decor {
+            position: absolute;
+            width: 130%;
+            height: 130%;
+            z-index: 1;
+            pointer-events: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* هالة ضوئية ناعمة تبرز الورود والأشرطة */
+        .glow-effect {
+            position: absolute;
+            width: 365px;
+            height: 365px;
+            background: radial-gradient(circle, rgba(254, 243, 199, 0.35) 0%, rgba(224, 242, 254, 0.25) 50%, rgba(255,255,255,0) 75%);
+            filter: blur(15px);
+        }
+
+        /* لمسات ذهبية خفيفة وراقية (فراشة ونجوم صغيرة) */
+        .gold-sparkle {
+            position: absolute;
+            background: linear-gradient(135deg, #fbbf24, #d97706);
+            border-radius: 50%;
+            opacity: 0.7;
+        }
+        .sp-1 { width: 6px; height: 6px; top: 18%; right: 45%; box-shadow: 0 0 6px #fcd34d; }
+        .sp-2 { width: 4px; height: 4px; bottom: 25%; left: 35%; box-shadow: 0 0 4px #fcd34d; }
+
+        .butterfly-gold {
+            position: absolute;
+            width: 22px;
+            height: 18px;
+            fill: #fcd34d;
+            opacity: 0.75;
+            top: 38%;
+            right: 15%;
+            transform: rotate(25deg);
+            filter: drop-shadow(0 2px 4px rgba(217, 119, 6, 0.2));
+        }
+
+        /* أشرطة البولاروايد الصغيرة الأنيقة */
+        .polaroid-strips-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            z-index: 2; /* فوق الورود والزينة */
+        }
+
+        .polaroid-strip {
+            position: absolute;
+            background: #ffffff;
+            padding: 12px 12px 28px 12px; /* حافة سفلية عريضة كشريط بولاروايد حقيقي */
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-radius: 4px;
+            width: 170px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            will-change: transform, box-shadow;
+        }
+
+        .polaroid-strip:hover {
+            transform: scale(1.04) translateY(-10px) !important;
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.15), 0 10px 20px rgba(0, 0, 0, 0.07);
+            z-index: 10;
+        }
+
+        /* الشريط الأول: أعلى ومائل لليسار قليلاً */
+        .p-strip-1 {
+            top: 40px;
+            left: 30px;
+            transform: rotate(-6deg);
+        }
+
+        /* الشريط الثاني: أسفل الأول ومائل لليمين */
+        .p-strip-2 {
+            top: 240px;
+            right: 30px;
+            transform: rotate(8deg);
+        }
+
+        /* إطار الصورة الفردية داخل البولاروايد */
+        .polaroid-photo {
+            width: 100%;
+            height: 145px;
+            overflow: hidden;
+            background: #f1f5f9;
+            border: 1px solid #f1f5f9;
+            border-radius: 2px;
+        }
+
+        .polaroid-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* =========================================
+           تصميم الظرف البنيوي الذكي
+        =========================================== */
+        
+        .envelope-wrapper {
+            position: relative;
+            width: 560px;  
+            height: 350px; 
+            cursor: pointer;
+            z-index: 10;
+            transform-style: preserve-3d;
+            transition: transform 0.5s cubic-bezier(0.2, 0.85, 0.3, 1.1), box-shadow 0.5s cubic-bezier(0.2, 0.85, 0.3, 1.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* ترك مساحة كافية للأشرطة الممتدة جهة اليمين */
+            margin-right: 220px; 
+            will-change: transform, box-shadow;
+        }
+
+        .envelope-wrapper:hover {
+            transform: scale(1.03) translateY(-4px) rotateX(4deg);
+        }
+
+        /* جسم الظرف الخلفي */
+        .envelope {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(191, 219, 254, 0.9), rgba(147, 197, 253, 0.95));
+            border-radius: 14px; 
+            box-shadow: 0 20px 45px rgba(30, 41, 59, 0.12), 0 10px 20px rgba(30, 41, 59, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            transform-style: preserve-3d;
+            z-index: 2;
+        }
+
+        /* غطاء الظرف العلوي */
+        .envelope-flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 280px solid transparent;  
+            border-right: 280px solid transparent; 
+            border-top: 190px solid rgba(219, 234, 254, 0.98); 
+            transform-origin: top center;
+            transition: transform 0.7s cubic-bezier(0.66, 0, 0.2, 1), z-index 0.7s step-end;
+            z-index: 5;
+            filter: drop-shadow(0 8px 6px rgba(0,0,0,0.08));
+            will-change: transform;
+        }
+
+        /* الجيوب الأمامية المتقاطعة احتضان حقيقي للورقة */
+        .envelope-pockets {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 4;
+            overflow: hidden;
+            border-radius: 14px;
+            pointer-events: none;
+        }
+
+        .envelope-pockets::before {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 280px solid rgba(147, 197, 253, 0.95); 
+            border-top: 350px solid transparent; 
+        }
+
+        .envelope-pockets::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 0;
+            border-right: 280px solid rgba(96, 165, 250, 0.95); 
+            border-top: 350px solid transparent; 
+        }
+
+        /* الختم الذهبي */
+        .gold-seal {
+            position: absolute;
+            top: 55%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 55px; 
+            height: 55px;
+            background: linear-gradient(135deg, #fbbf24, #d97706);
+            border-radius: 50%;
+            z-index: 20; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-family: 'Cinzel', serif;
+            font-size: 18px;
+            font-weight: bold;
+            box-shadow: 0 6px 16px rgba(217, 119, 6, 0.35), inset 0 0 5px rgba(255,255,255,0.5);
+            border: 1px solid #b45309;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+            will-change: transform, opacity;
+        }
+
+        /* =========================================
+           تأثير خروج وسحب الورقة المطور والواقعي
+        =========================================== */
+        
+        .letter {
+            position: absolute;
+            width: 500px;
+            height: 310px;
+            bottom: 10px;
+            left: 30px;
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+            z-index: 3; 
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(0) scale(0.95) rotate(0deg);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            will-change: transform, opacity, width, height, bottom, left, box-shadow;
+        }
+
+        /* محتوى النص داخل الورقة */
+        .letter-text {
+            font-family: 'Amiri', 'Cairo', serif;
+            font-style: italic;
+            font-size: 16px;
+            color: #0f172a;
+            line-height: 1.45; /* تعديل طفيف لضغط النص وتوفير مساحة */
+            white-space: pre-line;
+            letter-spacing: 0.3px;
+            transition: font-size 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+            position: relative;
+            display: inline-block;
+        }
+
+        /* تصميم مؤشر الكتابة الاحترافي الذكي الملتصق بالكلمات */
+        .custom-cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1.2em;
+            background-color: #d97706;
+            margin-left: 2px;
+            vertical-align: middle;
+            animation: professionalBlink 0.8s step-end infinite;
+            will-change: opacity;
+        }
+
+        @keyframes professionalBlink {
+            from, to { background-color: transparent }
+            50% { background-color: #d97706; }
+        }
+
+        .signature-text {
+            font-family: 'Amiri', 'Cairo', serif;
+            font-style: italic;
+            font-size: 20px;
+            color: #b45309;
+            line-height: 1.3;
+            
+            /* تثبيت التوقيع أسفل اليسار بشكل مطلق داخل الورقة */
+            position: absolute;
+            bottom: 35px; /* رفع التوقيع قليلاً ليتوسط المساحة الفارغة المخصصة له */
+            left: 45px;    
+            text-align: left;
+            
+            opacity: 0;
+            transition: opacity 0.8s ease;
+            z-index: 101; 
+        }
+
+        /* تعديل حجم الخط والتباعد لكي يتناسب مع المساحة الجديدة */
+        .envelope-wrapper.show-letter .letter-text {
+            font-size: 16px; 
+            line-height: 1.45; /* التوافق مع ارتفاع السطر الجديد */
+        }
+
+        @keyframes pullAndFocusLetter {
+            0% {
+                opacity: 0;
+                transform: translateY(0) scale(0.95);
+                z-index: 3;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+                width: 500px;
+                height: 310px;
+                bottom: 10px;
+                left: 30px;
+            }
+            5% { opacity: 1; }
+            50% {
+                opacity: 1;
+                transform: translateY(-350px) scale(0.98);
+                z-index: 3; 
+                box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+                width: 500px;
+                height: 310px;
+                bottom: 10px;
+                left: 30px;
+            }
+            53% { z-index: 100; }
+            100% {
+                opacity: 1;
+                z-index: 100;
+                transform: translateY(0) scale(1);
+                box-shadow: 0 35px 80px rgba(15, 23, 42, 0.24), 0 0 0 1px rgba(0,0,0,0.02);
+                
+                width: 720px;
+                height: 480px;
+                bottom: calc(50% - 240px);
+                left: calc(50% - 360px);
+                border-radius: 16px;
+                
+                /* زيادة الحشوة السفلية لـ 140px لضمان تفريغ مساحة كاملة حول التوقيع */
+                padding: 40px 40px 140px 40px; 
+                
+                /* جعل محاذاة الكلمات تبدأ من الأعلى بدلاً من السنتر لتوفر المساحة */
+                justify-content: flex-start; 
+                overflow: hidden;
+            }
+        }
+
+        /* =========================================
+           الفئات المضافة لإصلاح عمل الجافا سكريبت
+        =========================================== */
+        .envelope-wrapper.open-flap .envelope-flap {
+            transform: rotateX(180deg);
+            z-index: 1;
+        }
+
+        .envelope-wrapper.open-flap .gold-seal {
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(0);
+            pointer-events: none;
+        }
+
+        .envelope-wrapper.show-letter .letter {
+            animation: pullAndFocusLetter 2.5s forwards cubic-bezier(0.25, 1, 0.5, 1);
+            pointer-events: auto;
+        }
+
+        .signature-text.show {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="circle c1"></div>
+    <div class="circle c2"></div>
+
+    <div class="star" style="top: 10%; left: 20%;">★</div>
+    <div class="star" style="top: 8%; right: 12%; animation-delay: 0.5s;">✦</div>
+    <div class="star" style="bottom: 15%; left: 8%; animation-delay: 1s;">✦</div>
+    <div class="star" style="bottom: 10%; right: 25%; animation-delay: 1.5s;">★</div>
+
+    <div class="side-decor-section">
+        
+        <div class="luxury-floral-decor">
+            <div class="glow-effect"></div>
+
+            <div class="gold-sparkle sp-1"></div>
+            <div class="gold-sparkle sp-2"></div>
+
+            <svg class="butterfly-gold" viewBox="0 0 24 24">
+                <path d="M12,10 C10,5 4,3 2,6 C0,9 5,14 12,22 C19,14 24,9 22,6 C20,3 14,5 12,10 Z" stroke="#d97706" stroke-width="0.3"/>
+            </svg>
+        </div>
+
+        <div class="polaroid-strips-wrapper">
+            
+            <div class="polaroid-strip p-strip-1">
+                <div class="polaroid-photo">
+                    <img src="./images/instaa_4-7-20-26-11-12.png" alt="Photo 1">
+                </div>
+                <div class="polaroid-photo">
+                    <img src="./images/instagram_04-07-2026-11-9.png" alt="Photo 2">
+                </div>
+            </div>
+
+            <div class="polaroid-strip p-strip-2">
+                <div class="polaroid-photo">
+                    <img src="./images/instagram_4-7-2026-11-11.png" alt="Photo 3">
+                </div>
+                <div class="polaroid-photo">
+                    <img src="./images/instagram_4-7-2-0-26-11-13.png" alt="Photo 4">
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="envelope-wrapper" id="envelopeWrapper" onclick="openEnvelope()">
+        <div class="envelope-flap"></div>
+        <div class="envelope">
+            <div class="envelope-pockets"></div>
+            
+            <div class="letter" id="letter" onclick="event.stopPropagation();">
+                <div class="letter-text" id="typedText"></div>
+            </div>
+        </div>
+        <div class="gold-seal">GK8</div>
+    </div>
+</div>
+
+<script>
+    const textToType = `To the most amazing YouTuber \n
+First of all, we want to tell you how proud we are of you and everything you do. You are the person we learn so many useful things from, and you inspire us to improve ourselves every day.
+
+You deserve all the success you have because you work incredibly hard to improve yourself and build a better life. We will always support you and stand by your side, no matter what.
+
+Being an influencer is not just a title—it's about making a positive impact on others. You have inspired us in so many ways, and that is why you truly deserve to be called an influencer.
+
+Thank you for everything you do for us and for always being yourself. Happy 16th Birthday! Enjoy your day 
+We love you so much!`;
+
+    let isOpened = false;
+
+    function openEnvelope() {
+        if (isOpened) return; 
+        isOpened = true;
+
+        const wrapper = document.getElementById('envelopeWrapper');
+        const textElement = document.getElementById('typedText');
+
+        wrapper.classList.add('open-flap');
+
+        setTimeout(() => {
+            wrapper.classList.add('show-letter');
+        }, 600);
+
+        setTimeout(() => {
+            // إنشاء عنصر المؤشر المستقل ووضعه داخل حاوية النص
+            const cursorSpan = document.createElement('span');
+            cursorSpan.id = 'typingCursor';
+            cursorSpan.className = 'custom-cursor';
+            textElement.appendChild(cursorSpan);
+            
+            typeWriter(textToType, 0, textElement, cursorSpan);
+        }, 3200);
+    }
+
+    function typeWriter(text, index, element, cursor) {
+        if (index < text.length) {
+            // إدراج الحرف الجديد مباشرة قبل عنصر المؤشر لكي يتحرك المؤشر تلقائياً للأمام
+            cursor.insertAdjacentText('beforebegin', text.charAt(index));
+            index++;
+            setTimeout(() => typeWriter(text, index, element, cursor), 55);
+        } else {
+            // إزالة المؤشر تماماً وبنعومة عند انتهاء النص
+            cursor.style.transition = 'opacity 0.4s ease';
+            cursor.style.opacity = '0';
+            setTimeout(() => cursor.remove(), 400);
+            
+            // الانتظار لمدة 0.8 ثانية ثم إظهار جملة التوقيع الفاخرة
+            setTimeout(() => {
+                const letterContainer = document.getElementById('letter');
+                const sigDiv = document.createElement('div');
+                sigDiv.className = 'signature-text';
+                sigDiv.innerHTML = "Yasin,<br>and your fans";
+                letterContainer.appendChild(sigDiv);
+                
+                setTimeout(() => {
+                    sigDiv.classList.add('show');
+                }, 50);
+            }, 800);
+        }
+    }
+</script>
+
+</body>
+</html>

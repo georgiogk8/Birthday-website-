@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1366, initial-scale=1.0">
+    <title>Happy 16th Birthday!</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&family=Caveat:wght@700&family=Great+Vibes&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Baloo 2', sans-serif;
+        }
+
+        body {
+            overflow: hidden;
+            background: #f6f8fc;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Desktop Canvas Centering Wrapper */
+        @media (min-width: 1025px) {
+            body {
+                width: 100vw;
+                height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: #f0f4f8;
+            }
+        }
+
+        /* حاوية الصفحة الرئيسية */
+        .container {
+            width: 1366px;
+            height: 768px;
+            margin: auto;
+            position: relative;
+            
+            background-image: linear-gradient(135deg, rgba(161, 196, 253, 0.55) 0%, rgba(194, 233, 251, 0.55) 100%), 
+                              url('./images/IMG_20260627_185144.jpg');
+            
+            background-size: cover;
+            background-position: bottom;
+            background-repeat: no-repeat;
+            overflow: hidden;
+            
+            display: flex;
+            flex-direction: column; 
+            align-items: center;    
+            justify-content: flex-start; 
+            padding-top: 40px;      
+            
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
+            
+            transform-origin: center center;
+            transition: transform 0.1s ease-out;
+        }
+
+        /* الدوائر الزخرفية الأصلية */
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            z-index: 0;
+            opacity: 1;
+        }
+        .c1 { width: 300px; height: 300px; background: #DBEAFE; top: -120px; left: -100px; }
+        .c2 { width: 220px; height: 220px; background: #E0F2FE; bottom: -80px; right: -60px; }
+
+        /* --- تصميم جملة المعايدة المبتكرة والمشعة --- */
+        .birthday-header {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 2;
+            display: flex;
+            gap: 20px;
+        }
+
+        .birthday-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: 85px;
+            color: #fff;
+            text-shadow: 
+                1px 1px 3px rgba(0, 0, 0, 0.2),
+                0 0 10px rgba(255, 230, 0, 0.55),
+                0 0 20px rgba(255, 179, 0, 0.35);
+            display: inline-block;
+            
+            opacity: 0;
+            animation: slideWordDown 0.75s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+
+        .word-1 { animation-delay: 0.1s; }
+        .word-2 { animation-delay: 0.3s; }
+        .word-3 { animation-delay: 0.5s; }
+
+        /* --- شبكة الصور المتطورة --- */
+        .photo-container {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            width: 90%;
+            align-items: center;
+            z-index: 2;
+        }
+
+        /* الصف العلوي (4 صور متساوية الحجم) */
+        .row-top {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            width: 100%;
+        }
+
+        /* الصف السفلي (5 صور متدرجة الحجم) */
+        .row-bottom {
+            display: flex;
+            justify-content: center;
+            align-items: center; 
+            gap: 25px;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        /* --- إطارات الصور المتعرجة المطورة للتأثير المرجعي --- */
+        .photo-item {
+            overflow: visible; 
+            background: transparent; 
+            border: none; 
+            box-shadow: none; 
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            
+            opacity: 0;
+            /* أنميشن الارتداد المطاطي (Elastic Pop) المطابق للفيديو المرجعي */
+            animation: photoElasticEntrance 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        .photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; 
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.12)) drop-shadow(0 12px 24px rgba(0,0,0,0.18)); 
+            transition: filter 0.4s ease;
+        }
+
+        /* تحديد أحجام الصور */
+        .row-top .photo-item { width: 140px; height: 140px; }
+        .size-small { width: 110px; height: 110px; }
+        .size-medium { width: 145px; height: 145px; }
+        .size-large { width: 190px; height: 190px; }
+
+        /* تأثير الـ Hover */
+        .photo-item:hover {
+            transform: translateY(-10px) scale(1.08) !important; 
+        }
+
+        .photo-item:hover img {
+            filter: drop-shadow(0 8px 12px rgba(0,0,0,0.18)) drop-shadow(0 20px 35px rgba(0,0,0,0.28));
+        }
+
+        /* تنسيق التوقيت المتتابع المتطلي (Staggered Timeline) من الثانية 8 لـ 14:
+           تبدأ الصور بالظهور تباعاً بعد استقرار النص تماماً (عند 1.0 ثانية)،
+           بفارق زمني دقيق 0.22 ثانية بين كل صورة وصورة لإنتاج تأثير الموجة السينمائية.
+        */
+        
+        /* الصف العلوي: من اليسار إلى اليمين */
+        .row-top .photo-item:nth-child(1) { animation-delay: 1.00s; }
+        .row-top .photo-item:nth-child(2) { animation-delay: 1.22s; }
+        .row-top .photo-item:nth-child(3) { animation-delay: 1.44s; }
+        .row-top .photo-item:nth-child(4) { animation-delay: 1.66s; }
+
+        /* الصف السفلي: يكمل التتابع مباشرة من اليسار إلى اليمين */
+        .row-bottom .photo-item:nth-child(1) { animation-delay: 1.88s; }
+        .row-bottom .photo-item:nth-child(2) { animation-delay: 2.10s; }
+        .row-bottom .photo-item:nth-child(3) { animation-delay: 2.32s; } /* الصورة الكبيرة بالمنتصف */
+        .row-bottom .photo-item:nth-child(4) { animation-delay: 2.54s; }
+        .row-bottom .photo-item:nth-child(5) { animation-delay: 2.76s; }
+
+        /* النجوم الزخرفية */
+        .star {
+            position: absolute;
+            color: #FBBF24;
+            font-size: 25px;
+            animation: pulseStar 2s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes pulseStar {
+            0%, 100% { opacity: 0.3; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* أنميشن هبوط الكلمات المنفصلة */
+        @keyframes slideWordDown {
+            0% {
+                opacity: 0;
+                transform: translateY(-80px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* أنميشن الارتداد المطاطي الجديد للصور (مطابق لحركة الفيديو) مع إضافة تأثير البلور */
+        @keyframes photoElasticEntrance {
+            0% {
+                opacity: 0;
+                transform: scale(0.3);
+                filter: blur(10px); /* بلور قوي في البداية */
+            }
+            70% {
+                opacity: 0.85;
+                transform: scale(1.08); /* الارتداد الأقصى للخارج */
+                filter: blur(3px); /* بلور خفيف أثناء الارتداد */
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1); /* الاستقرار على الحجم الطبيعي المعين لها */
+                filter: blur(0); /* لا بلور، الصورة واضحة تماماً */
+            }
+        }
+
+        /* تصميم الزر */
+        .btn-link {
+            text-decoration: none;
+            margin-top: 35px; 
+            z-index: 10;
+            opacity: 0;
+            animation: btnEntrance 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+            animation-delay: 3.20s; /* يظهر الزر بسلاسة بعد ظهور آخر صورة مباشرة */
+        }
+
+        @keyframes btnEntrance {
+            0% { opacity: 0; transform: scale(0.88); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        .btn-yes {
+            border: 2px solid rgba(255, 255, 255, 0.4); 
+            padding: 12px 50px;
+            border-radius: 40px;
+            font-size: 28px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            background: rgba(255, 255, 255, 0.2); 
+            color: #fff; 
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05), 0 8px 24px rgba(0, 0, 0, 0.08);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+        }
+
+        .btn-yes:hover { 
+            background: #2563EB; 
+            color: white; 
+            border-color: #2563EB;
+            transform: translateY(-5px); 
+            box-shadow: 0 12px 28px rgba(37, 99, 235, 0.35), 0 0 15px rgba(37, 99, 235, 0.15); 
+        }
+    </style>
+</head>
+<body>
+
+<div class="container" id="mainCanvas">
+    <div class="circle c1"></div>
+    <div class="circle c2"></div>
+
+    <div class="star" style="top: 10%; left: 20%;">★</div>
+    <div class="star" style="top: 8%; right: 12%; animation-delay: 0.5s;">✦</div>
+    <div class="star" style="bottom: 15%; left: 8%; animation-delay: 1s;">✦</div>
+    <div class="star" style="bottom: 10%; right: 25%; animation-delay: 1.5s;">★</div>
+
+    <div class="birthday-header">
+        <span class="birthday-title word-1">Happy</span>
+        <span class="birthday-title word-2">16th</span>
+        <span class="birthday-title word-3">Birthday</span>
+    </div>
+
+    <div class="photo-container">
+        
+        <div class="row-top">
+            <div class="photo-item"><img src="./images/Picsart_26-06-26_01-30-45-857.png" alt="Photo 1" style="transform: scale(1.55);"></div>
+            <div class="photo-item"><img src="./images/Picsart_26-06-25_15-52-07-921.png" alt="Photo 2" style="transform: scale(1.55);"></div>
+            <div class="photo-item"><img src="./images/Picsart_26-06-26_01-33-19-708.png" alt="Photo 3" style="transform: scale(1.55);"></div>
+            <div class="photo-item"><img src="./images/Picsart_26-06-26_01-32-47-371.png" alt="Photo 4" style="transform: scale(1.55);"></div>
+        </div>
+
+        <div class="row-bottom">
+            <div class="photo-item size-small"><img src="./images/Picsart_26-06-25_15-58-46-540.png" alt="Photo 5" style="transform: scale(1.55);"></div>
+            
+            <div class="photo-item size-medium"><img src="./images/Picsart_26-06-25_15-46-35-288.png" alt="Photo 6" style="transform: scale(1.55);"></div>
+           
+            <div class="photo-item size-large"><img src="./images/Picsart_26-06-25_15-56-46-960.png" alt="Photo 7" style="transform: scale(1.45);"></div>
+            
+            <div class="photo-item size-medium"><img src="./images/Picsart_26-06-25_15-47-30-626.png" alt="Photo 8" style="transform: scale(1.55);"></div>
+            
+            <div class="photo-item size-small"><img src="./images/Picsart_26-06-25_15-59-43-660.png" alt="Photo 9" style="transform: scale(1.55);"></div>
+        </div>
+
+    </div>
+
+    <a href="next2.html" class="btn-link">
+        <button class="btn-yes">&#10142;</button>
+    </a>
+
+</div>
+
+<script>
+    function adjustDesktopScaling() {
+        const canvas = document.getElementById('mainCanvas');
+        if (!canvas) return;
+
+        if (window.innerWidth <= 1024) {
+            canvas.style.transform = "none";
+            return;
+        }
+
+        const nativeWidth = 1366;
+        const nativeHeight = 768;
+
+        const scaleX = window.innerWidth / nativeWidth;
+        const scaleY = window.innerHeight / nativeHeight;
+
+        const optimalScale = Math.min(scaleX, scaleY);
+        canvas.style.transform = `scale(${optimalScale})`;
+    }
+
+    window.addEventListener('resize', adjustDesktopScaling);
+    window.addEventListener('DOMContentLoaded', adjustDesktopScaling);
+</script>
+</body>
+</html>
