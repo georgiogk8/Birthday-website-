@@ -22,6 +22,14 @@
             -moz-osx-font-smoothing: grayscale;
         }
 
+        /* منع الأنميشن حتى يتم تحميل الصور بالكامل لضمان السلاسة */
+        body.images-not-loaded *, 
+        body.images-not-loaded *::before, 
+        body.images-not-loaded *::after {
+            animation-play-state: paused !important;
+            opacity: 0 !important;
+        }
+
         /* Desktop Canvas Centering Wrapper */
         @media (min-width: 1025px) {
             body {
@@ -139,6 +147,9 @@
             
             opacity: 0;
             animation: photoElasticEntrance 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+            
+            /* تحسين أداء كرت الشاشة أثناء الأنميشن */
+            will-change: transform, opacity;
         }
 
         .photo-item img {
@@ -246,7 +257,8 @@
         }
     </style>
 </head>
-<body>
+<!-- إعطاء الـ body كلاس لمنع الحركة مبدئياً -->
+<body class="images-not-loaded">
 
 <div class="container" id="mainCanvas">
     <div class="circle c1"></div>
@@ -307,6 +319,11 @@
         const optimalScale = Math.min(scaleX, scaleY);
         canvas.style.transform = `scale(${optimalScale})`;
     }
+
+    // إزالة كلاس الحجب وتشغيل الأنميشن فور اكتمال تحميل كل العناصر والصور تماماً
+    window.addEventListener('load', function() {
+        document.body.classList.remove('images-not-loaded');
+    });
 
     window.addEventListener('resize', adjustDesktopScaling);
     window.addEventListener('DOMContentLoaded', adjustDesktopScaling);
